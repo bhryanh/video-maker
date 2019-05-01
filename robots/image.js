@@ -51,24 +51,25 @@ async function robot() {
 
                 try{
                     if(content.downloadImages.includes(imageUrl)){
-                        throw new Error('Imagem já foi baixada')
+                        throw new Error('Image already downloaded')
                     }
 
                     await downloadAndSave(imageUrl, `${sentenceIndex}-original.png`)
-                    console.log(`>Baixou imagem com sucesso: ${imageUrl}`)
+                    console.log(`> [image-robot] Image downloaded with success: ${imageUrl}`)
                     break
                 } catch(error){
-                    console.log(`>Erro ao baixar ${imageUrl}: ${error} `)
+                    console.log(`> [image-robot] Download error ${imageUrl}: ${error} `)
                 }
             }
         }
     }
 
+
     const content = state.load()
 
     await fetchImagesOfAllSentences(content)
     await downloadAllImages(content)
-
+   
     state.save(content)
 }
 
