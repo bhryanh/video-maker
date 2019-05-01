@@ -1,6 +1,11 @@
 const readline = require('readline-sync')
+const state = require('./state.js')
 
-var robot = (content) => {
+var robot = () => {
+    const content = {
+        maximumSentences: 7
+    }
+
     var askAndReturnSearchTerm = () => {
         return readline.question('Type a Wikipedia search term: ')
     }
@@ -14,6 +19,7 @@ var robot = (content) => {
     
     content.searchTerm = askAndReturnSearchTerm()
     content.prefix = askAndReturnPrefix()
+    state.save(content)
 }
 
 module.exports = robot
